@@ -1,0 +1,20 @@
+{
+  "spaceId": "rtfqh3o35zcv",
+  "environmentId": "master",
+  "managementToken": "CFPAT-jC0YzLlMzW7ZHm8Wt9eo3MDMLn7I37UjhPmZ0XoiksA",
+  "deliveryToken": "YlFUFyiLCw4jBxqChXbf7BsJgsUNRVgCMIwHIuu1a3o",
+  "exportDir": "/Apps/TNMAS/POC-TMNAS-JAMSTACK/utils/ContentfulData/export",
+  "saveFile": true,
+  "contentFile": "export.json",
+  "includeDrafts": false,
+  "includeArchived": false,
+  "skipContentModel": false,
+  "skipContent": false,
+  "skipRoles": false,
+  "skipWebhooks": false,
+  "contentOnly": false,
+  "downloadAssets": false,
+  "maxAllowedLimit": 1000,
+  "errorLogFile": "/Apps/TNMAS/POC-TMNAS-JAMSTACK/utils/ContentfulData/export/error.log",
+  "useVerboseRenderer": false
+}
