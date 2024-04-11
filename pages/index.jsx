@@ -14,7 +14,7 @@ export async function getStaticProps( context ) {
 
 export default function HomePage({ homePageData }) {
 
-  //console.log("Home Page Data")
+  console.log("Home Page Data")
 
   if (!homePageData) return null  
 
