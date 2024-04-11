@@ -5,9 +5,7 @@ import ContentfulApi from "../utils/ContentfulApi";
 // import NextSeoCommon from '../components/Accessories/NextSeoCommon';
 
 export const getStaticPaths = async () => {
-
   const res = await ContentfulApi.getAllLandingPages()
-
   const paths = res.items.map(item => {
     return {
       params: { slug: item.slug }
@@ -18,26 +16,27 @@ export const getStaticPaths = async () => {
     paths,
     fallback: true
   }
-
 }
 
-export const getStaticProps = async (context) => {
+export async function getStaticProps( context ) {
+
+  console.log("Slug Context Params draft mode:")
+  console.log(context)  
 
   const res = await ContentfulApi.getLandingPage(context.params.slug, context.draftMode? "1":"2")
-  
-  if (!res?.items?.length){
+
+  if (!res.items.length){
     return{ 
       redirect: {
         destination: '/',
         permanent: false
       }
     }
-  }
+  }  
 
   return {
-    props: { slugPageData: res.items }, revalidate: 1
+    props: { slugPageData: res? res.items:null }, revalidate: 1
   }
-
 }
 
 export default function SlugPage({ slugPageData }) {
@@ -46,7 +45,7 @@ export default function SlugPage({ slugPageData }) {
 
   if (!slugPageData) return null  
 
-  //console.log(slugPageData)
+  console.log(slugPageData)
 
   const pageDataLiveUpdate = useContentfulLiveUpdates(slugPageData);
   const Sections = pageDataLiveUpdate[0]?.componentSectionCollection?.items;

@@ -4,8 +4,8 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import TopicCta from './TopicCta';
 
 function renderOptions(links) {
-  console.log("Links")
-  console.log(links)  
+  //console.log("Links")
+  //console.log(links)  
   
   const entryMap = new Map();
 

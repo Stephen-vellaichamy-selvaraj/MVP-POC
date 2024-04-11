@@ -60,116 +60,10 @@ export default class ContentfulApi {
 
     static async getLandingPage(slug, preview){
 
-      const HeroBannerCarousel = `... on ComponentHeroBanner{
-              __typename
-              sys{id}
-              slidersCollection(limit:5){
-                items{
-                  ...topicImageWithCaptionFields
-                }
-              }
-              smallBannersCollection(limit:2){
-                items{
-                  ...topicImageWithCaptionFields
-                }
-              }
-            }`;
-
-      const CallActionArea = `... on ComponentCallActionArea{     
-              callActionSection{
-                ...ctaFields
-              }
-            }`;
-
-      const BannerArea = `... on ComponentBannerArea{
-            __typename
-            sys{id}
-            internalName
-            bannersCollection(limit:2)
-            {
-              items{
-								...topicImageWithCaptionFields
-              }
-            }
-          }`
-
-      const ShippingInfor =`... on ComponentShippingInfo{
-        sys{id}
-        __typename        
-        infosCollection(limit:4){
-          items{
-            sys{id}
-            __typename
-            title
-            description
-            theme
-          }
-        }
-      }`
-
-      //****Query Builder Starts*****/
-      const QueryComponentList = `query getComponents($isPreview:Boolean) {
-          pageLandingCollection(where: { slug: "${slug}" }, limit: 1, preview: $isPreview) {
-            items {
-              componentSectionCollection(limit: 20) {
-                items {
-                  ... on Entry {
-                    __typename
-                  }                    
-                }
-              }
-            }
-          }
-      }`
-
-      //console.log(QueryComponentList);
-
-      const getComponentSelectionResponse = await this.callContentful(QueryComponentList, preview)        
-
-      //console.log(`ComponentSelectionResponse: ${JSON.stringify(getComponentSelectionResponse)}`)
-      
-      const Sections = getComponentSelectionResponse?.data?.pageLandingCollection?.items[0]?.componentSectionCollection?.items;
-
-      //console.log(`Sections: ${Sections}`)
-
-      let componentNames= [];
-
-      Sections && Sections?.map((section) =>
-        {
-          if (section!== undefined && section!== null){
-            componentNames.push(section?.__typename)
-          }
-          else{
-            console.log("Components not found")
-          }
-        }
-      )
-
-      //console.log(`componentNames: ${componentNames}`)
-
-      let queryStr = "";
-      componentNames && componentNames?.map((section, index) => {
-        const SwitchComponents= {
-          ComponentHeroBanner : HeroBannerCarousel,
-          ComponentCallActionArea : CallActionArea,
-          ComponentBannerArea: BannerArea,
-          ComponentShippingInfo: ShippingInfor
-        };
-        
-        //console.log(`section: ${section}`)
-
-        if (section!== undefined && section!== null){
-          queryStr = queryStr + SwitchComponents[section && section];           
-        }
-      })
-      
-      //console.log(`queryStr: ${queryStr}`)
-
       // build query
-      const queryString = `
-        query($isPreview:Boolean) {
-          pageLandingCollection(where: { slug: "${slug}" }, limit: 1, preview: $isPreview) {
-            items {
+      const queryString = `query($isPreview:Boolean) {
+        pageLandingCollection(where: { slug: "${slug}" }, limit: 1, preview: $isPreview) {
+          items {
               sys {id}
               __typename
               seoMeta{
@@ -182,35 +76,77 @@ export default class ContentfulApi {
                     __typename
                     sys {id}
                   }
-                  ${queryStr}
+                  ... on ComponentHeroBanner{
+                    __typename
+                    sys{id}
+                    slidersCollection(limit:5){
+                      items{
+                        ...topicImageWithCaptionFields
+                      }
+                    }
+                    smallBannersCollection(limit:2){
+                      items{
+                        ...topicImageWithCaptionFields
+                      }
+                    }
+                  }
+                  ... on ComponentCallActionArea{
+                    callActionSection{
+                      ...ctaFields
+                    }
+                  }
+                  ... on ComponentBannerArea{
+                    __typename
+                    sys{id}
+                    internalName
+                    bannersCollection(limit:2)
+                    {
+                      items{
+                      ...topicImageWithCaptionFields
+                      }
+                    }
+                  }
+                  ... on ComponentShippingInfo{
+                      sys{id}
+                      __typename
+                      infosCollection(limit:4){
+                      items{
+                        sys{id}
+                        __typename
+                        title
+                        description
+                        theme
+                      }
+                    }
+                  }
                 }
               }
             }
           }
         }
-        fragment topicImageWithCaptionFields on TopicImageWithCaption{
-          __typename
-          sys{id}
-          title
-          subTitle
-          image{url}
-          description
-          cta{
-            title
-            description
-            callToAction
-            buttonText
-          }
-        }
-        fragment ctaFields on TopicCta{
-          __typename
-          sys{id}
+      fragment topicImageWithCaptionFields on TopicImageWithCaption{
+        __typename
+        sys{id}
+        title
+        subTitle
+        image{url}
+        description
+        cta{
           title
           description
           callToAction
           buttonText
         }
-      `        
+      }
+      fragment ctaFields on TopicCta{
+        __typename
+        sys{id}
+        title
+        description
+        callToAction
+        buttonText
+      }`
+     
       //console.log(queryString);
 
       const response = await this.callContentful(queryString, preview);
