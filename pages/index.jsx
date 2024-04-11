@@ -4,7 +4,9 @@ import ContentfulApi from '../utils/ContentfulApi';
 
 export async function getStaticProps( context ) {
   const { params } = context;
+  console.log(`{Index context: ${JSON.stringify(context)}}`)
   const res = await ContentfulApi.getLandingPage("home-page", context.draftMode? "1":"2")
+  
   return {
     props: { homePageData: res? res.items:null }, revalidate: 1
   }

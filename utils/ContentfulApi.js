@@ -60,6 +60,8 @@ export default class ContentfulApi {
 
     static async getLandingPage(slug, preview){
 
+      console.log(`{Preview context: ${JSON.stringify(preview)}}`)
+
       // build query
       const queryString = `query($isPreview:Boolean) {
         pageLandingCollection(where: { slug: "${slug}" }, limit: 1, preview: $isPreview) {
@@ -132,6 +134,8 @@ export default class ContentfulApi {
         image{url}
         description
         cta{
+          sys{id}
+          __typename          
           title
           description
           callToAction

@@ -20,8 +20,8 @@ export const getStaticPaths = async () => {
 
 export async function getStaticProps( context ) {
 
-  console.log("Slug Context Params draft mode:")
-  console.log(context)  
+  // console.log("Slug Context Params draft mode:")
+  // console.log(context)  
 
   const res = await ContentfulApi.getLandingPage(context.params.slug, context.draftMode? "1":"2")
 
@@ -45,13 +45,13 @@ export default function SlugPage({ slugPageData }) {
 
   if (!slugPageData) return null  
 
-  console.log(slugPageData)
+  //console.log(slugPageData)
 
   const pageDataLiveUpdate = useContentfulLiveUpdates(slugPageData);
   const Sections = pageDataLiveUpdate[0]?.componentSectionCollection?.items;
   const sysId = { sysId: pageDataLiveUpdate[0]?.sys?.id }
 
-  console.log(`SysID: ${sysId}`)
+  //console.log(`SysID: ${sysId}`)
 
   return (
     <>
