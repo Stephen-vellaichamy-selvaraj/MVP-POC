@@ -1,8 +1,10 @@
 import { useContentfulLiveUpdates } from '@contentful/live-preview/react';
-import { useContentfulInspectorMode } from '@contentful/live-preview/react';
 import SwitchComponents from '../components/Common/SwitchComponents';
 import ContentfulApi from "../utils/ContentfulApi";
-// import NextSeoCommon from '../components/Accessories/NextSeoCommon';
+
+import Header from '../components/Common/Navbar/Header';
+import Footer from '../components/Common/Footer';
+import getCategory from '../utils/Hooks/getCategory';
 
 export const getStaticPaths = async () => {
   const res = await ContentfulApi.getAllLandingPages()
@@ -20,10 +22,8 @@ export const getStaticPaths = async () => {
 
 export async function getStaticProps( context ) {
 
-  // console.log("Slug Context Params draft mode:")
-  // console.log(context)  
-
   const res = await ContentfulApi.getLandingPage(context.params.slug, context.draftMode? "1":"2")
+  const Categories = await getCategory();  
 
   if (!res.items.length){
     return{ 
@@ -32,30 +32,28 @@ export async function getStaticProps( context ) {
         permanent: false
       }
     }
-  }  
+  }
 
   return {
-    props: { slugPageData: res? res.items:null }, revalidate: 1
+    props: { slugPageData: res? res.items:null, categories: Categories? Categories?.items:null }, revalidate: 1
   }
 }
 
-export default function SlugPage({ slugPageData }) {
+export default function SlugPage({ slugPageData, categories }) {
 
-  //console.log("Home Page Data")
-
-  if (!slugPageData) return null  
-
-  //console.log(slugPageData)
+  if (!slugPageData) return null
 
   const pageDataLiveUpdate = useContentfulLiveUpdates(slugPageData);
   const Sections = pageDataLiveUpdate[0]?.componentSectionCollection?.items;
   const sysId = { sysId: pageDataLiveUpdate[0]?.sys?.id }
-
-  //console.log(`SysID: ${sysId}`)
+  const seoFields = homePageData[0] && homePageData[0]?.seoMeta
+  console.log("seoFields")
+  console.log(seoFields)  
 
   return (
     <>
-        
+        <Header {...{categories}}/>
+        {seoFields && <NextSeoCommon {...seoFields} />}
         {
           Sections && Sections?.map((section, index) => {
 
@@ -63,8 +61,6 @@ export default function SlugPage({ slugPageData }) {
               console.log("Section not found!!!");
               return null
             }
-
-            //console.log("Switcher :" + section?.__typename); 
 
             const Switcher = SwitchComponents[section.__typename];             
 
@@ -78,6 +74,7 @@ export default function SlugPage({ slugPageData }) {
             }
         })
         }
+        <Footer />
     </>
   )
 }

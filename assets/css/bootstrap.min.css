@@ -7445,7 +7445,7 @@ fieldset:disabled .btn {
 }
 
 .justify-content-end {
-    justify-content: end !important
+    justify-content: flex-end !important
 }
 
 .justify-content-center {
@@ -7469,7 +7469,7 @@ fieldset:disabled .btn {
 }
 
 .align-items-end {
-    align-items: end !important
+    align-items: flex-end !important
 }
 
 .align-items-center {
@@ -7489,7 +7489,7 @@ fieldset:disabled .btn {
 }
 
 .align-content-end {
-    align-content: end !important
+    align-content: flex-end !important
 }
 
 .align-content-center {
@@ -7517,7 +7517,7 @@ fieldset:disabled .btn {
 }
 
 .align-self-end {
-    align-self: end !important
+    align-self: flex-end !important
 }
 
 .align-self-center {
@@ -8391,7 +8391,7 @@ fieldset:disabled .btn {
     }
 
     .justify-content-sm-end {
-        justify-content: end !important
+        justify-content: flex-end !important
     }
 
     .justify-content-sm-center {
@@ -8415,7 +8415,7 @@ fieldset:disabled .btn {
     }
 
     .align-items-sm-end {
-        align-items: end !important
+        align-items: flex-end !important
     }
 
     .align-items-sm-center {
@@ -8435,7 +8435,7 @@ fieldset:disabled .btn {
     }
 
     .align-content-sm-end {
-        align-content: end !important
+        align-content: flex-end !important
     }
 
     .align-content-sm-center {
@@ -8463,7 +8463,7 @@ fieldset:disabled .btn {
     }
 
     .align-self-sm-end {
-        align-self: end !important
+        align-self: flex-end !important
     }
 
     .align-self-sm-center {
@@ -9043,7 +9043,7 @@ fieldset:disabled .btn {
     }
 
     .justify-content-md-end {
-        justify-content: end !important
+        justify-content: flex-end !important
     }
 
     .justify-content-md-center {
@@ -9067,7 +9067,7 @@ fieldset:disabled .btn {
     }
 
     .align-items-md-end {
-        align-items: end !important
+        align-items: flex-end !important
     }
 
     .align-items-md-center {
@@ -9087,7 +9087,7 @@ fieldset:disabled .btn {
     }
 
     .align-content-md-end {
-        align-content: end !important
+        align-content: flex-end !important
     }
 
     .align-content-md-center {
@@ -9115,7 +9115,7 @@ fieldset:disabled .btn {
     }
 
     .align-self-md-end {
-        align-self: end !important
+        align-self: flex-end !important
     }
 
     .align-self-md-center {
@@ -9695,7 +9695,7 @@ fieldset:disabled .btn {
     }
 
     .justify-content-lg-end {
-        justify-content: end !important
+        justify-content: flex-end !important
     }
 
     .justify-content-lg-center {
@@ -9719,7 +9719,7 @@ fieldset:disabled .btn {
     }
 
     .align-items-lg-end {
-        align-items: end !important
+        align-items: flex-end !important
     }
 
     .align-items-lg-center {
@@ -9739,7 +9739,7 @@ fieldset:disabled .btn {
     }
 
     .align-content-lg-end {
-        align-content: end !important
+        align-content: flex-end !important
     }
 
     .align-content-lg-center {
@@ -9767,7 +9767,7 @@ fieldset:disabled .btn {
     }
 
     .align-self-lg-end {
-        align-self: end !important
+        align-self: flex-end !important
     }
 
     .align-self-lg-center {
@@ -10347,7 +10347,7 @@ fieldset:disabled .btn {
     }
 
     .justify-content-xl-end {
-        justify-content: end !important
+        justify-content: flex-end !important
     }
 
     .justify-content-xl-center {
@@ -10371,7 +10371,7 @@ fieldset:disabled .btn {
     }
 
     .align-items-xl-end {
-        align-items: end !important
+        align-items: flex-end !important
     }
 
     .align-items-xl-center {
@@ -10391,7 +10391,7 @@ fieldset:disabled .btn {
     }
 
     .align-content-xl-end {
-        align-content: end !important
+        align-content: flex-end !important
     }
 
     .align-content-xl-center {
@@ -10419,7 +10419,7 @@ fieldset:disabled .btn {
     }
 
     .align-self-xl-end {
-        align-self: end !important
+        align-self: flex-end !important
     }
 
     .align-self-xl-center {
@@ -10999,7 +10999,7 @@ fieldset:disabled .btn {
     }
 
     .justify-content-xxl-end {
-        justify-content: end !important
+        justify-content: flex-end !important
     }
 
     .justify-content-xxl-center {
@@ -11023,7 +11023,7 @@ fieldset:disabled .btn {
     }
 
     .align-items-xxl-end {
-        align-items: end !important
+        align-items: flex-end !important
     }
 
     .align-items-xxl-center {
@@ -11043,7 +11043,7 @@ fieldset:disabled .btn {
     }
 
     .align-content-xxl-end {
-        align-content: end !important
+        align-content: flex-end !important
     }
 
     .align-content-xxl-center {
@@ -11071,7 +11071,7 @@ fieldset:disabled .btn {
     }
 
     .align-self-xxl-end {
-        align-self: end !important
+        align-self: flex-end !important
     }
 
     .align-self-xxl-center {

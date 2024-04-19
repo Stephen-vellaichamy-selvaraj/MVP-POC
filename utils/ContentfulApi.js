@@ -36,6 +36,8 @@ export default class ContentfulApi {
 
       const bearerToken = preview == "1" ? process.env.PIM_PREVIEW_ACCESS_TOKEN : process.env.PIM_ACCESS_TOKEN;
       const isPreviewFlag = preview == "1" ? true : false;
+
+      console.log(`Bearer token: ${fetchUrl}, isPreviewFlag: ${isPreviewFlag}`)
  
       const fetchOptions = {
         method: "POST",
@@ -47,11 +49,14 @@ export default class ContentfulApi {
         },
         body: JSON.stringify({ query, variables:{"isPreview": isPreviewFlag}}),
       };
+
+      
   
       try {
         const data = await fetch(fetchUrl, fetchOptions).then((response) =>
           response.json(),
         );
+        
         return data;
       } catch (error) {
         throw new Error("Could not fetch data from Contentful!");
@@ -71,6 +76,11 @@ export default class ContentfulApi {
               seoMeta{
                 pageTitle
                 pageDescription
+                shareImagesCollection{
+                  items{
+                    url
+                  }            
+                }                
               }
               componentSectionCollection(limit: 10) {
                 items {
@@ -120,6 +130,12 @@ export default class ContentfulApi {
                         theme
                       }
                     }
+                  }
+                  ...on ComponentSearch{
+                    sys{id}
+                    __typename
+                    internalName
+                    title
                   }
                 }
               }
@@ -207,7 +223,24 @@ export default class ContentfulApi {
 
       return landingPages;
 
-    }    
+    }
+    
+    static async getPrdCategory( preview )
+    {
+      const qry =`query {
+        productCollection{
+          items{
+            distinct_on:category
+          }
+        }
+      }`;
+
+      const prdCategoryCollection = await this.callPim( qry, preview );
+
+      console.log(`Category: ${JSON.stringify(prdCategoryCollection)}`);
+
+      return prdCategoryCollection
+    }
     
     static async getAllDetailPage( preview )
     {      
