@@ -92,30 +92,8 @@ export default function Index({ serverState, url}) {
                         <div className="single-widget">
                         <h3>All Categories</h3>
                           <DynamicWidgets fallbackComponent={FallbackComponent}>
-                            {/* <RefinementList attribute="price" />*/}
-                          </DynamicWidgets>                         
-                     
+                          </DynamicWidgets>                    
                         </div>
-                        {/* End Single Widget */}
-                        {/* Start Single Widget */}
-                        {/* <div className="single-widget range">
-                        <h3>Price Range</h3>
-                        <input
-                            type="range"
-                            className="form-range"
-                            name="range"
-                            step={1}
-                            min={100}
-                            max={10000}
-                            defaultValue={10}
-                            onchange="rangePrimary.value=value"
-                        />
-                        <div className="range-inner">
-                            <label>$</label>
-                            <input type="text" id="rangePrimary" placeholder={100} />
-                        </div>
-                        </div> */}
-                        {/* End Single Widget */}
                     </div>
                     {/* End Product Sidebar */}
                 </div>
@@ -171,31 +149,6 @@ export default function Index({ serverState, url}) {
                         <div className="tab-content" id="nav-tabContent">
                             <div className="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab"                  >
                                 <div className="row">
-                                    {/* <div className="col-lg-4 col-md-6 col-12">
-                                        <div className="single-product">
-                                            <div className="product-image">
-                                                <img
-                                                src="assets/images/products/product-1.jpg"
-                                                alt="#"
-                                                />
-                                                <div className="button">
-                                                <a href="product-details.html" className="btn">
-                                                    <i className="lni lni-cart" /> Add to Cart
-                                                </a>
-                                                </div>
-                                            </div>
-                                            <div className="product-info">
-                                                <span className="category">Watches</span>
-                                                <h4 className="title">
-                                                <a href="product-grids.html">Xiaomi Mi Band 5</a>
-                                                </h4>
-
-                                                <div className="price">
-                                                <span>$199.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> */}
                                     <Hits hitComponent={Hit} />
                                 </div>
                                 <div className="row">

@@ -5,6 +5,7 @@ import ShippingInfo from '../ShippingInfo';
 import BannerArea from "../BannerArea";
 import CallActionArea from "../CallActionArea";
 import AlgoliaSearch from './Search/AlgoliaSearch';
+import GeneralDescription from '../GeneralDescription';
 
 const SwitchComponents = {
     ComponentHeroBanner : HeroArea,
@@ -12,7 +13,8 @@ const SwitchComponents = {
     ComponentShippingInfo: ShippingInfo,
     ComponentBannerArea: BannerArea,
     ComponentCallActionArea: CallActionArea,
-    ComponentSearch: AlgoliaSearch
+    ComponentSearch: AlgoliaSearch,
+    ComponentRichText: GeneralDescription
 };
 
 export default SwitchComponents 

@@ -1,6 +1,13 @@
-import React from 'react'
 
-export default function HeaderMiddle() {
+import SearchForm from "./SearchForm"
+import { usePathname } from 'next/navigation'
+
+export default function HeaderMiddle(props) {
+
+  const pathname = usePathname()  
+  const show = (pathname=="/search") ? 'hidden=false':'hidden=true' 
+  console.log(`First url: ${pathname}, hidden: ${show}`); // '/blog/xyz'
+
   return (
     <>
       <div className="header-middle">
@@ -14,8 +21,15 @@ export default function HeaderMiddle() {
               {/* End Header Logo */}
             </div>
             <div className="col-lg-5 col-md-7 d-xs-none">
-              {/* <Search /> */}
+            {/* Start Main Menu Search */}
+            <div className="main-menu-search">
+                { 
+                  pathname!="/search" ? <SearchForm/>:""
+                }
             </div>
+            {/* End Main Menu Search */}
+            </div>
+
             <div className="col-lg-4 col-md-2 col-5">
               <div className="middle-right-area">
                 <div className="nav-hotline">

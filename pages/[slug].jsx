@@ -3,6 +3,7 @@ import SwitchComponents from '../components/Common/SwitchComponents';
 import ContentfulApi from "../utils/ContentfulApi";
 
 import Header from '../components/Common/Navbar/Header';
+import NextSeoCommon from '../components/Common/NextSeoCommon';
 import Footer from '../components/Common/Footer';
 import getCategory from '../utils/Hooks/getCategory';
 
@@ -46,7 +47,7 @@ export default function SlugPage({ slugPageData, categories }) {
   const pageDataLiveUpdate = useContentfulLiveUpdates(slugPageData);
   const Sections = pageDataLiveUpdate[0]?.componentSectionCollection?.items;
   const sysId = { sysId: pageDataLiveUpdate[0]?.sys?.id }
-  const seoFields = homePageData[0] && homePageData[0]?.seoMeta
+  const seoFields = slugPageData[0] && slugPageData[0]?.seoMeta
   console.log("seoFields")
   console.log(seoFields)  
 

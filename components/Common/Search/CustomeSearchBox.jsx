@@ -16,7 +16,7 @@ export default function CustomSearchBox(props) {
     }
   
     return (
-      <div>
+      <div className="stephenclass">
         <form
           action=""
           role="search"

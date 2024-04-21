@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation'
 export default function BreadCrumbs() {
     
     const pathname = usePathname()
-    console.log(pathname)
+    //console.log(pathname)
     var addresses = pathname?.split('/').map(function (address, index) {
         console.log(index)
         if (index!=0)

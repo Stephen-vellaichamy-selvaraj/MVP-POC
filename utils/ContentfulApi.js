@@ -137,6 +137,14 @@ export default class ContentfulApi {
                     internalName
                     title
                   }
+                  ... on ComponentRichText{
+                    sys{id}
+                    __typename
+                    internalName                    
+                    content{
+                      json
+                    }
+                  }                  
                 }
               }
             }
@@ -167,7 +175,7 @@ export default class ContentfulApi {
         buttonText
       }`
      
-      //console.log(queryString);
+      console.log(queryString);
 
       const response = await this.callContentful(queryString, preview);
 
