@@ -65,7 +65,7 @@ export default class ContentfulApi {
 
     static async getLandingPage(slug, preview){
 
-      console.log(`{Preview context: ${JSON.stringify(preview)}}`)
+      //console.log(`{Preview context: ${JSON.stringify(preview)}}`)
 
       // build query
       const queryString = `query($isPreview:Boolean) {
@@ -165,6 +165,7 @@ export default class ContentfulApi {
           callToAction
           buttonText
         }
+        style
       }
       fragment ctaFields on TopicCta{
         __typename
@@ -175,7 +176,7 @@ export default class ContentfulApi {
         buttonText
       }`
      
-      console.log(queryString);
+      //console.log(queryString);
 
       const response = await this.callContentful(queryString, preview);
 
@@ -245,7 +246,7 @@ export default class ContentfulApi {
 
       const prdCategoryCollection = await this.callPim( qry, preview );
 
-      console.log(`Category: ${JSON.stringify(prdCategoryCollection)}`);
+      //console.log(`Category: ${JSON.stringify(prdCategoryCollection)}`);
 
       return prdCategoryCollection
     }

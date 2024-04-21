@@ -1,7 +1,14 @@
 import React from 'react'
 import MegaCategoryMenu from './MegaCategoryMenu'
+import { useContentfulInspectorMode } from '@contentful/live-preview/react';
 
 export default function HeaderBottom(props) {
+  if(!props) return null;
+  const HeaderDatasourceSysId = props?.HeaderDatasource[0]?.sys?.id
+  const HeaderBottomInsProps = useContentfulInspectorMode({ entryId: HeaderDatasourceSysId });
+  const headerFields = props?.HeaderDatasource[0]?.fields
+  //console.log(headerFields?.socialMediaLinks)
+
   return (
     <>
         <div className="container">
@@ -30,111 +37,7 @@ export default function HeaderBottom(props) {
                     className="collapse navbar-collapse sub-menu-bar"
                     id="navbarSupportedContent"
                   >
-                    <ul id="nav" className="navbar-nav ms-auto">
-                      <li className="nav-item">
-                        <a
-                          href="./"
-                          className="active"
-                          aria-label="Toggle navigation"
-                        >
-                          Home
-                        </a>
-                      </li>
-                      <li className="nav-item">
-                        <a
-                          className="dd-menu collapsed"
-                          href="#"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#submenu-1-2"
-                          aria-controls="navbarSupportedContent"
-                          aria-expanded="false"
-                          aria-label="Toggle navigation"
-                        >
-                          Pages
-                        </a>
-                        <ul className="sub-menu collapse" id="submenu-1-2">
-                          <li className="nav-item">
-                            <a href="about-us.html">About Us</a>
-                          </li>
-                          <li className="nav-item">
-                            <a href="faq.html">Faq</a>
-                          </li>
-                          <li className="nav-item">
-                            <a href="login.html">Login</a>
-                          </li>
-                          <li className="nav-item">
-                            <a href="register.html">Register</a>
-                          </li>
-                          <li className="nav-item">
-                            <a href="mail-success.html">Mail Success</a>
-                          </li>
-                          <li className="nav-item">
-                            <a href="404.html">404 Error</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li className="nav-item">
-                        <a
-                          className="dd-menu collapsed"
-                          href="#"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#submenu-1-3"
-                          aria-controls="navbarSupportedContent"
-                          aria-expanded="false"
-                          aria-label="Toggle navigation"
-                        >
-                          Shop
-                        </a>
-                        <ul className="sub-menu collapse" id="submenu-1-3">
-                          <li className="nav-item">
-                            <a href="product-grids.html">Shop Grid</a>
-                          </li>
-                          <li className="nav-item">
-                            <a href="product-list.html">Shop List</a>
-                          </li>
-                          <li className="nav-item">
-                            <a href="product-details.html">shop Single</a>
-                          </li>
-                          <li className="nav-item">
-                            <a href="cart.html">Cart</a>
-                          </li>
-                          <li className="nav-item">
-                            <a href="checkout.html">Checkout</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li className="nav-item">
-                        <a
-                          className="dd-menu collapsed"
-                          href="#"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#submenu-1-4"
-                          aria-controls="navbarSupportedContent"
-                          aria-expanded="false"
-                          aria-label="Toggle navigation"
-                        >
-                          Blog
-                        </a>
-                        <ul className="sub-menu collapse" id="submenu-1-4">
-                          <li className="nav-item">
-                            <a href="blog-grid-sidebar.html">Blog Grid Sidebar</a>
-                          </li>
-                          <li className="nav-item">
-                            <a href="blog-single.html">Blog Single</a>
-                          </li>
-                          <li className="nav-item">
-                            <a href="blog-single-sidebar.html">
-                              Blog Single Sibebar
-                            </a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li className="nav-item">
-                        <a href="contact.html" aria-label="Toggle navigation">
-                          Contact Us
-                        </a>
-                      </li>
-                    </ul>
+
                   </div>{" "}
                   {/* navbar collapse */}
                 </nav>
@@ -144,28 +47,15 @@ export default function HeaderBottom(props) {
             <div className="col-lg-4 col-md-6 col-12">
               {/* Start Nav Social */}
               <div className="nav-social">
-                <h5 className="title">Follow Us:</h5>
+                <h5 className="title" {...HeaderBottomInsProps({fieldId:"socialMediaSectionTitle"})}>{headerFields?.socialMediaSectionTitle}</h5>
                 <ul>
-                  <li>
-                    <a href="#">
-                      <i className="lni lni-facebook-filled" />
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i className="lni lni-twitter-original" />
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i className="lni lni-instagram" />
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i className="lni lni-skype" />
-                    </a>
-                  </li>
+                  {
+                    headerFields && headerFields?.socialMediaLinks?.map((item, index) => (
+                      <li><a href={item?.fields?.socialMediaReference} 
+                      // {...useContentfulInspectorMode({ entryId: item?.sys?.id })({ fieldId: 'socialMediaReference' })}
+                      ><i className={`lni ${item?.fields?.linkStyle}`} /></a></li>
+                    ))
+                  }
                 </ul>
               </div>
               {/* End Nav Social */}

@@ -5,8 +5,8 @@ export default function NextSeoCommon(seoFields) {
   
   if (!seoFields) return null;
 
-  console.log("SEO Fields")
-  console.log(seoFields)
+  //console.log("SEO Fields")
+  //console.log(seoFields)
 
   return (
     <NextSeo

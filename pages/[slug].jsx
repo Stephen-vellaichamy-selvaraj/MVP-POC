@@ -6,6 +6,7 @@ import Header from '../components/Common/Navbar/Header';
 import NextSeoCommon from '../components/Common/NextSeoCommon';
 import Footer from '../components/Common/Footer';
 import getCategory from '../utils/Hooks/getCategory';
+import getHeaderDataSource from '../utils/Hooks/getHeaderDataSource';
 
 export const getStaticPaths = async () => {
   const res = await ContentfulApi.getAllLandingPages()
@@ -24,7 +25,11 @@ export const getStaticPaths = async () => {
 export async function getStaticProps( context ) {
 
   const res = await ContentfulApi.getLandingPage(context.params.slug, context.draftMode? "1":"2")
-  const Categories = await getCategory();  
+  const Categories = await getCategory();
+
+  const HeaderDatasource = await getHeaderDataSource();
+  //console.log("Header Setting: ")
+  //console.log(HeaderDatasource)
 
   if (!res.items.length){
     return{ 
@@ -36,11 +41,11 @@ export async function getStaticProps( context ) {
   }
 
   return {
-    props: { slugPageData: res? res.items:null, categories: Categories? Categories?.items:null }, revalidate: 1
+    props: { slugPageData: res? res.items:null, categories: Categories? Categories?.items:null, HeaderDatasource: HeaderDatasource? HeaderDatasource?.items:null }, revalidate: 1
   }
 }
 
-export default function SlugPage({ slugPageData, categories }) {
+export default function SlugPage({ slugPageData, categories, HeaderDatasource }) {
 
   if (!slugPageData) return null
 
@@ -48,12 +53,10 @@ export default function SlugPage({ slugPageData, categories }) {
   const Sections = pageDataLiveUpdate[0]?.componentSectionCollection?.items;
   const sysId = { sysId: pageDataLiveUpdate[0]?.sys?.id }
   const seoFields = slugPageData[0] && slugPageData[0]?.seoMeta
-  console.log("seoFields")
-  console.log(seoFields)  
 
   return (
     <>
-        <Header {...{categories}}/>
+        <Header {...{categories,HeaderDatasource}}/>
         {seoFields && <NextSeoCommon {...seoFields} />}
         {
           Sections && Sections?.map((section, index) => {

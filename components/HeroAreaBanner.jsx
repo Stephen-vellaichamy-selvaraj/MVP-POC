@@ -12,7 +12,7 @@ export default function HeroAreaBanner(props, index) {
         {/* Start Small Banner */}
         <div
         {...HeroAreaBannerInsProps({ fieldId: "image"})}
-        className="hero-small-banner"
+        className={`hero-small-banner ${props?.style}`}
         style={{backgroundImage: `url(${props && props?.image?.url})`}}>        
         <div className="content">
             <h2 {...HeroAreaBannerInsProps({ fieldId: "subTitle"})}>

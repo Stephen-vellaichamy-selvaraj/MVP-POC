@@ -1,6 +1,15 @@
 import React from 'react'
+import { useContentfulInspectorMode } from '@contentful/live-preview/react';
 
-export default function TopBar() {
+export default function TopBar(props) {
+    
+    if(!props) return null;
+
+    const HeaderDatasourceSysId = props?.HeaderDatasource[0]?.sys?.id
+    const TopBarInsProps = useContentfulInspectorMode({ entryId: HeaderDatasourceSysId });
+    const headerFields = props?.HeaderDatasource[0]?.fields
+    console.log(headerFields?.headerMiddleNavigation)
+
   return (
     <>
         {/* Start Topbar */}
@@ -10,20 +19,6 @@ export default function TopBar() {
                 <div className="col-lg-4 col-md-4 col-12">
                 <div className="top-left">
                     <ul className="menu-top-link">
-                    <li>
-                        <div className="select-position">
-                        <select id="select4">
-                            <option value={0} defaultValue="">
-                            $ USD
-                            </option>
-                            <option value={1}>€ EURO</option>
-                            <option value={2}>$ CAD</option>
-                            <option value={3}>₹ INR</option>
-                            <option value={4}>¥ CNY</option>
-                            <option value={5}>৳ BDT</option>
-                        </select>
-                        </div>
-                    </li>
                     <li>
                         <div className="select-position">
                         <select id="select5">
@@ -44,16 +39,14 @@ export default function TopBar() {
                 </div>
                 <div className="col-lg-4 col-md-4 col-12">
                 <div className="top-middle">
-                    <ul className="useful-links">
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>
-                        <a href="about-us.html">About Us</a>
-                    </li>
-                    <li>
-                        <a href="contact.html">Contact Us</a>
-                    </li>
+                    <ul className="useful-links" {...TopBarInsProps({fieldId:"headerMiddleNavigation"})}>
+                        {
+                            headerFields && headerFields?.headerMiddleNavigation.map((item, index) => (
+                                <li>
+                                    <a href={`/${item?.fields?.slug}`}>{item?.fields?.internalName}</a>
+                                </li>
+                            ))
+                        }
                     </ul>
                 </div>
                 </div>

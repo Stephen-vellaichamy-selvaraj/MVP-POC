@@ -1,22 +1,28 @@
 
 import SearchForm from "./SearchForm"
-import { usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation' 
+import { useContentfulInspectorMode } from '@contentful/live-preview/react';
 
 export default function HeaderMiddle(props) {
+  
+  if(!props) return null;
 
-  const pathname = usePathname()  
-  const show = (pathname=="/search") ? 'hidden=false':'hidden=true' 
-  console.log(`First url: ${pathname}, hidden: ${show}`); // '/blog/xyz'
+  const pathname = usePathname()
 
+  const HeaderDatasourceSysId = props?.HeaderDatasource[0]?.sys?.id
+  const HeaderMiddleInsProps = useContentfulInspectorMode({ entryId: HeaderDatasourceSysId });
+  const headerFields = props?.HeaderDatasource[0]?.fields
+  //console.log(headerFields)
+  
   return (
     <>
       <div className="header-middle">
         <div className="container">
           <div className="row align-items-center">
-            <div className="col-lg-3 col-md-3 col-7">
+            <div className="col-lg-3 col-md-3 col-7" {...HeaderMiddleInsProps({fieldId:"siteIcon"})}>
               {/* Start Header Logo */}
               <a className="navbar-brand" href="./">
-                <img src="/logo.svg" alt="Logo" />
+                <img src={headerFields?.siteIcon?.fields?.file?.url} alt="Logo" />
               </a>
               {/* End Header Logo */}
             </div>
@@ -32,11 +38,11 @@ export default function HeaderMiddle(props) {
 
             <div className="col-lg-4 col-md-2 col-5">
               <div className="middle-right-area">
-                <div className="nav-hotline">
+                <div className="nav-hotline" {...HeaderMiddleInsProps({fieldId:"contactPhoneNumber"})}>
                   <i className="lni lni-phone" />
                   <h3>
-                    Hotline:
-                    <span>(+100) 123 456 7890</span>
+                    {headerFields?.contactPhoneNumber}
+                    <span>{headerFields?.contactPhoneTitle}</span>
                   </h3>
                 </div>
                 <div className="navbar-cart">

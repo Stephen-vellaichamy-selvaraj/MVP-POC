@@ -21,7 +21,7 @@ function enableDraftMode(res) {
 
 export default async (req, res) => {
 
-  console.log(req.query);
+  //console.log(req.query);
     
   const { slug, preview, secret, pagetype } = req.query; 
 

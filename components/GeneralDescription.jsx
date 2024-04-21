@@ -6,7 +6,7 @@ export default function GeneralDescription(props) {
     
     if (!props) return null
 
-    console.log(`Richtext: ${JSON.stringify(props?.content?.json)}`)
+    //console.log(`Richtext: ${JSON.stringify(props?.content?.json)}`)
 
     const richTextInsProps = useContentfulInspectorMode({ entryId: props?.sys?.id });
 
